@@ -42,23 +42,24 @@ to_jalali gdate =
     gy = gdate.year - 1600
     g_day_no = gd
       + ( gy * 365)
-      + ( gy + 3 ) / 4
-      - ( gy + 99 ) / 100
-      + ( gy + 399 ) / 400
+      + floor(( gy + 3 ) / 4)
+      - floor(( gy + 99 ) / 100)
+      + floor(( gy + 399 ) / 400)
       + (if (gm > 1 && ((gy % 4 == 0 && gy % 100 /= 0) || (gy % 400 == 0))) then 1 else 0)
       + List.sum (List.take gm gregorian_days_in_month)
 
-    j_np = floor((g_day_no - 79) / 12053)
-    j_day_no = ( floor(g_day_no - 79) % 12053 ) % 1461
+    j_np = floor(toFloat(g_day_no - 79) / 12053)
+    j_day_no = ((g_day_no - 79) % 12053 ) % 1461
     jy = 979
       + (33 * j_np)
-      + 4 * floor(toFloat(floor(g_day_no - 79) % 12053) / 1461)
+      + 4 * floor(toFloat((g_day_no - 79) % 12053) / 1461)
       + (if j_day_no >= 365 then floor(toFloat(j_day_no - 1) / 365) else 0)
     
     j_day_no2 = if j_day_no >= 365 then (j_day_no - 1) % 365 else j_day_no
     (jd, jm) = calculate_g2j_day_and_month j_day_no2 (List.take 11 jalali_days_in_month) 0
   in
     { gdate | year=jy, month=jm, day=jd }
+
 
 
 to_gregorian jdate =
