@@ -108,3 +108,15 @@ to_gregorian jdate =
     
   in
     { jdate | year=gy, month=gm, day=gd }
+
+-----------------------------------------------------
+-- Usage
+-----------------------------------------------------
+today: Date
+today = {year = 2017, month=6, day=25}
+
+main = 
+  text (toString
+      [ (to_jalali today)
+      , (to_gregorian {year=1396, month=04, day=04})
+      ])
