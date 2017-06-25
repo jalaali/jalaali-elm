@@ -42,9 +42,9 @@ to_jalali gdate =
     gy = gdate.year - 1600
     g_day_no = gd
       + ( gy * 365)
-      + floor(( gy + 3 ) / 4)
-      - floor(( gy + 99 ) / 100)
-      + floor(( gy + 399 ) / 400)
+      + floor(( toFloat gy + 3 ) / 4)
+      - floor(( toFloat gy + 99 ) / 100)
+      + floor(( toFloat gy + 399 ) / 400)
       + (if (gm > 1 && ((gy % 4 == 0 && gy % 100 /= 0) || (gy % 400 == 0))) then 1 else 0)
       + List.sum (List.take gm gregorian_days_in_month)
 
