@@ -33,6 +33,7 @@ to_jalali gdate =
   in
     { gdate | year=jy, month=jm, day=jd }
 
+to_gregorian : Date -> Date
 to_gregorian jdate =
   let
     jy = jdate.year - 979
