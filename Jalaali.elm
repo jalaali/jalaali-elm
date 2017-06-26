@@ -1,4 +1,3 @@
-import Html exposing (text)
 import List
 
 type alias Date =
@@ -97,13 +96,3 @@ calculate_j2g_day_and_month remained_days days_in_month_list month leap =
           calculate_j2g_day_and_month (remained_days - this_month_days - leap_day) rest_year (month + 1) leap
         else
           (remained_days + 1, month + 1)
-
------------------------------------------------------
--- Usage
------------------------------------------------------
-today = Date 2017 6 25
-main = 
-  [ to_jalali today
-  , to_gregorian {year=1396, month=04, day=04}
-  ] |> toString
-    |> text
